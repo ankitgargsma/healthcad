@@ -1,0 +1,26 @@
+[2019-07-31 10:32:43 +0000] [14453] [INFO] Starting gunicorn 19.9.0
+[2019-07-31 10:32:43 +0000] [14453] [INFO] Listening at: http://0.0.0.0:5002 (14453)
+[2019-07-31 10:32:43 +0000] [14453] [INFO] Using worker: sync
+[2019-07-31 10:32:43 +0000] [14456] [INFO] Booting worker with pid: 14456
+[2019-07-31 11:05:47 +0000] [14453] [CRITICAL] WORKER TIMEOUT (pid:14456)
+/root/pneumonia/app.py:68: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  logits = sm(logits)
+[2019-07-31 11:05:47 +0000] [14456] [INFO] Worker exiting (pid: 14456)
+[2019-07-31 11:05:47 +0000] [14727] [INFO] Booting worker with pid: 14727
+[2019-07-31 11:06:19 +0000] [14453] [CRITICAL] WORKER TIMEOUT (pid:14727)
+[2019-07-31 11:06:19 +0000] [14727] [INFO] Worker exiting (pid: 14727)
+[2019-07-31 11:06:19 +0000] [14732] [INFO] Booting worker with pid: 14732
+[2019-07-31 11:52:33 +0000] [14453] [CRITICAL] WORKER TIMEOUT (pid:14732)
+[2019-07-31 11:52:34 +0000] [15522] [INFO] Booting worker with pid: 15522
+[2019-07-31 14:04:15 +0000] [14453] [INFO] Handling signal: term
+/root/pneumonia/app.py:68: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  logits = sm(logits)
+[2019-07-31 14:04:15 +0000] [15522] [INFO] Worker exiting (pid: 15522)
+[2019-07-31 14:04:15 +0000] [14453] [INFO] Shutting down: Master
+[2019-07-31 15:09:10 +0000] [3845] [INFO] Starting gunicorn 19.9.0
+[2019-07-31 15:09:10 +0000] [3845] [INFO] Listening at: http://0.0.0.0:83 (3845)
+[2019-07-31 15:09:10 +0000] [3845] [INFO] Using worker: sync
+[2019-07-31 15:09:10 +0000] [3848] [INFO] Booting worker with pid: 3848
+[2019-07-31 15:09:10 +0000] [3850] [INFO] Booting worker with pid: 3850
+[2019-07-31 15:09:10 +0000] [3852] [INFO] Booting worker with pid: 3852
+[2019-07-31 15:09:10 +0000] [3853] [INFO] Booting worker with pid: 3853

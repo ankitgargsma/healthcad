@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block content %}
+
+<h2 align ="center">Pneumonia Detection</h2>
+
+<div class="header">
+    This is a image classifier based on chest xray based pneumonia classification <a href="https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia">dataset</a>. The dataset consists of two classes pneumonia and normal. 
+    <br>
+    <h2>
+        How to use the classifier:
+        </h2>
+    
+    1. Click the choose button, this will give you a pop up for selecting the file.<br>
+    2. Now select the image file you want to classify(Image should be of one of the above mentioned class or the classifier won't work.).<br>
+    3. Once the image is uploaded you will be able to see it on the screen, now press predict button.<br>
+    
+        4. Once the prediction is done, image will appear on screen, this image consists of two parts, the confidence score of top 5 performing class and the class activation map. <br>
+        
+    <h2>
+        What is class activation map:
+       
+        </h2>
+        Class activation map(cam) is simple idea to visualize where in image our classifier is looking. It can be helpful for the cases where we want to observe any anomaly in image, for example in case of detecting pneumonia in chest xray, the cam will tell where it was looking at the time of classifying the image and this can help doctors visualize the results and rectify problems better. 
+    <p></p>
+
+<div>
+    <form id="upload-file" method="post" enctype="multipart/form-data">
+        <label for="imageUpload" class="upload-label">
+            Choose...
+        </label>
+        <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+    </form>
+
+    <div class="image-section" style="display:none;">
+        <div class="img-preview">
+            <div id="imagePreview">
+            </div>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
+        </div>
+    </div>
+    <h2>Confidence score and class activation map</h2>
+    <br>
+    <div class="loader" style="display : none"></div>
+    </div>
+    <div id="imagePreview1">
+
+    </div>
+
+</div>
+
+{% endblock %}
