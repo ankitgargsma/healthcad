@@ -1,13 +1,10 @@
-
 from __future__ import division, print_function
 # coding=utf-8
 import sys
 import os
-import csv
 import glob
 import re
 import numpy as np
-
 import torch
 from torch import nn
 # Flask utils
@@ -17,11 +14,10 @@ from gevent.pywsgi import WSGIServer
 from torchvision import transforms
 import cv2
 from torchvision import models
+import pandas as pd
 import matplotlib
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
-
-dict = {}
 ind = 0
 # Define a flask application
 application = Flask(__name__)
@@ -153,38 +149,54 @@ def pneumonia_predict(image_path):
     image = cv2.resize(image,(224,224))
     img1 = np.append(img,img2,axis = 1)
     txt = randomString()
-    with open('names.csv','a') as new_file:
-        csv_writer = csv.writer(new_file)
-        
     cv2.imwrite('static/{}.jpg'.format(txt),img1)
-    return txt
+    pred1,pred = torch.max(pred,dim = 1)
+    if(os.path.exists('static/results.csv')):
+        data = pd.read_csv('static/results.csv')
+        print(txt)
+        a = [{'file_name':txt,'prediction':pred.item(),'confidence':pred1.item()}] 
+        data = data.append(pd.DataFrame(a))
+        print(data)
+        data.to_csv('./static/results.csv',index = False)
+    else:
+        print(pred)
+        data = [{'file_name':txt,'prediction':pred.item(),'confidence':pred1.item()}]
+        df = pd.DataFrame(data)
+        df.to_csv('./static/results.csv',index= False)
+    return pred,txt
 
 
 
 @application.route('/', methods=['GET'])
 def index():
     # Main page
-    return render_template('index.html')
+    return render_template('index.html')    
 
 @application.route('/pneumonia', methods=['GET'])
 def pneumonia():
     # Main page
     return render_template('xxx.html')
 
-
+@application.route('/instructions', methods=['GET'])
+def instructions():
+    # Main page
+    return render_template('instructions.html')
 
 
 @application.route('/predict', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
+        
         f = request.files['file']
         basepath = os.getcwd()
         file_path = os.path.join(
             basepath, 'uploads', secure_filename(f.filename))
         f.save(file_path)
-        ind = pneumonia_predict(file_path)
-        
+        pred,ind = pneumonia_predict(file_path)
         return './static/' + ind + '.jpg'
     return None
+
 if __name__ == '__main__':
-    application.run(port=90)
+    application.run(port = 90)
+
+    
